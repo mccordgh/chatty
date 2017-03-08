@@ -47,53 +47,6 @@ Create multiple IIFEs, following the Single Responsibility Principle, that perfo
 1. One IIFE should contain a function that accepts an element `id`, and the user message, and then add the user's message - along with the delete button - to the specified parent element. Each message should be stored in a private array in this IIFE. This IIFE should also expose a function to read all messages, and delete a single message.
 1. One IIFE should accept a message element `id` and then remove the correct element from the DOM. This IIFE should also remove the corresponding message from the private array that was created in the previous IIFE.
 
-## Helpful hints
-
-### Adding listeners to dynamically created elements
-
-When you add a DOM element to your page with JavaScript, you cannot add a listener to them directly in your code with `addEventListener`. This is because the element didn't exist when your JavaScript file got parsed and executed by the browser when it loaded. What you need to do is listen for the event on the `<body>` element, and then inspect what the target of the event is (i.e. which element the user actually performed the action on).
-
-```js
-document.querySelector("body").addEventListener("click", function(event) {
-  console.log(event);
-
-  // Handle the click event on any li
-  if (event.target.tagName.toLowerCase() === "li") {
-    console.log("You clicked on an <li> element");
-  }
-
-  // Handle the click event on any DOM element with a certain class
-  if (event.target.className === "article-section") {
-    console.log("You clicked on an `article-section` element");
-  }
-
-  // Inspect the `id` property of the event target
-  if (event.target.id === "page-title") {
-    console.log("You clicked on the page-title element");
-  }
-});
-```
-
-### Setting element attributes
-
-You can use JavaScript to [set any attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute) on a DOM element. You've seen how to add/remove classes with `classList.add()`, `classList.remove()`, and `classList.toggle()`, but you can also add `id`, `href`, `src`, or any other attribute.
-
-Here's an example of how to add a `disabled` attribute to a button in the DOM.
-
-```html
-<button class="clear-messages">Clear messages</button>
-```
-
-```js
-// This will disable the first button with a class of "button-message"
-document.getElementsByClassName("clear-messages")[0].setAttribute("disabled", true);
-```
-
-
-## Bonus criteria
-
-For you overachievers, once you've completed the basic criteria, take a stab at these.
-
 ### Multiple JSON files
 
 Instead of having one JSON file with five messages in it, break each message into its own JSON file. How do you handle loading them in succession?
@@ -111,20 +64,6 @@ Instead of having one JSON file with five messages in it, break each message int
 1. Inside the modal, show two color picker fields - one for background color and one for font color.
 1. Add a *Save* and *Cancel* button to modal.
 1. When user clicks *Save* apply the chosen colors.
-
-### Multiple users
-
-1. Create an object in your JavaScript that holds an array of names (*see example below*).
-1. Next to the message input box, there should be a radio button group for each name in the list.
-1. When a user enters a message, it should be prepended with the chosen user's name, in bold text.
-1. Keep in mind that this will likely change the structure of your JSON file since the pre-loaded messages have to have this information on them.
-
-```js
-// User object
-var users = {
-  names: ["Xavier", "Joanna", "Mackenzie", "Gunter", "Iveta", "Sven"];
-};
-```
 
 ### Message limit
 
